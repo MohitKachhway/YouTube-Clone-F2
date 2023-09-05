@@ -1,0 +1,126 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+}
+.nav-container{
+    display: flex;
+    background: rgba(33, 33, 33, 1);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+}
+.nav-profile img{
+    cursor: pointer;
+}
+.nav-search-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+}
+.nav-search-bar input{
+    flex:content;
+    padding: 10px;
+    border: none;
+    margin-right: 5px;
+    background: rgba(18, 18, 18, 1); 
+    color: #fff;
+}
+/* -------------nav end-------------- */
+
+.main-container div{
+    /* border: 2px solid red; */
+}
+.main-container{
+    display: grid;
+    grid-template-columns: 19% 80%;
+    grid-template-rows: 5% 95%;
+    background: rgba(33, 33, 33, 1);
+    column-gap: 10px;
+
+}
+.menu-bar img{
+    width: 100%;
+    cursor: pointer;
+}
+.side-bar{
+  grid-row: 1 / span 2;
+}
+.side-bar img{
+    width: 100%;
+    cursor: pointer;
+}
+.main-content{
+    background-color: black;
+    color: #fff;
+}
+.video-cart div{
+    /* border: 1px solid rgb(27, 216, 14);  */
+}
+.video-cart{
+    /* border: 2px solid red;  */
+    width: 220px;
+    cursor: pointer;
+}
+.video-cart .thumbnail img{
+    width: 100%;
+}
+.thumbnail{
+    position: relative;
+    max-width: 300px;
+}
+.thumbnail .duration{
+    background-color: black;
+    position: absolute;
+   bottom: 7px;
+   right: 7px;
+   padding: 2px;
+   font-size: 10px;
+}
+.video-details{
+    display: flex;
+}
+.video-details .profile-logo{
+    width: 50px;
+    margin: auto;
+}
+.video-details .details .video-name{
+    margin-top: 5px;
+    font-size: 10px;
+}
+.video-details .details .channel-name,.views-time{
+    /* font-weight: 100; */
+    font-size: 10px;
+    color: rgba(170, 170, 170, 1);
+}
+.channel-name{
+    margin-top: 5px;
+}
+.video-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 5px;
+    margin: 20px 10px 10px 30px;
+}
+@media screen and (max-width:425px){
+    .video-container{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        gap: 5px;
+        margin: 20px 10px 10px 20px;
+
+    }
+    .video-cart{
+        width: 250px;
+    }
+    .thumbnail .duration{
+        font-size: 10px;
+    }
+}
