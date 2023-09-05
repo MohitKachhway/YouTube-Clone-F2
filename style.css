@@ -61,13 +61,14 @@
     background-color: black;
     color: #fff;
 }
-.video-cart div{
-    /* border: 1px solid rgb(27, 216, 14);  */
-}
+
 .video-cart{
-    /* border: 2px solid red;  */
     width: 220px;
     cursor: pointer;
+    transition: .4s;
+}
+.video-cart:hover{
+    transform: scale(1.09);
 }
 .video-cart .thumbnail img{
     width: 100%;

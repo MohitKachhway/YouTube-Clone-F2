@@ -31,6 +31,15 @@ function getTimeOfvideo(publishTime){
      return `${Math.floor(secondGap/secondPerYear)} years ago`;
     
 }
+function viewCount(views){
+    if(views<1000){
+        return `${views} Views`;
+    }
+    if(views<1000000){
+        return `${Math.floor(views/1000)}K Views`;
+    }
+    return `${Math.floor(views/1000000)}M Views`
+}
 
 async function getVideoStatistic(videoId){
     const url = `${baseUrl}/videos?key=${apiKey}&part=statistics&id=${videoId}`;
@@ -43,15 +52,6 @@ async function getVideoStatistic(videoId){
         alert(error);
     }
 
-}
-function viewCount(views){
-    if(views<1000){
-        return `${views} Views`;
-    }
-    if(views<1000000){
-        return `${Math.floor(views/1000)}K Views`;
-    }
-    return `${Math.floor(views/1000000)}M Views`
 }
 
 async function getChannelDetails(channelId){
@@ -89,9 +89,6 @@ function renderVideo(arr){
             </div>`
             
           videoContainer.appendChild(videoCart)
-       
-       
-     
     });
 }
 
@@ -122,43 +119,58 @@ inputbtn.addEventListener("keyup",(event)=>{
      getData(searchString);
      }
  })
-    //item=  {
-    //     "kind": "youtube#searchResult",
-    //     "etag": "Dn_HjQZj7iXCRkRlNQXL3xxXTxE",
-    //     "id": {
-    //         "kind": "youtube#video",
-    //         "videoId": "_O_9HUZvJK4"
-    //     },
-    //     "snippet": {
-    //         "publishedAt": "2023-07-31T13:18:46Z",
-    //         "channelId": "UCJsApDpIBPpRRg0n9ZVmKAQ",
-    //         "title": "Weather obsession of Bangalore people📈🤣 #shorts #ahmedmasood #bangalore #ytshorts",
-    //         "description": "",
-    //         "thumbnails": {
-    //             "default": {
-    //                 "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/default.jpg",
-    //                 "width": 120,
-    //                 "height": 90
-    //             },
-    //             "medium": {
-    //                 "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/mqdefault.jpg",
-    //                 "width": 320,
-    //                 "height": 180
-    //             },
-    //             "high": {
-    //                 "url": "https://i.ytimg.com/vi/_O_9HUZvJK4/hqdefault.jpg",
-    //                 "width": 480,
-    //                 "height": 360
-    //             }
-    //         },
-    //         "channelTitle": "Ahmed Masood",
-    //         "liveBroadcastContent": "none",
-    //         "publishTime": "2023-07-31T13:18:46Z"
-    //     },
-    //     "statistics" :
-    // }
 
-    // {
+//  search api
+// data= {
+//     "kind": "youtube#searchListResponse",
+//     "etag": "sQk5DJH6OEYRjtNBUw7yFSgRXOc",
+//     "nextPageToken": "CAEQAA",
+//     "regionCode": "IN",
+//     "pageInfo": {
+//       "totalResults": 1000000,
+//       "resultsPerPage": 1
+//     },
+//     "items": [
+//       {
+//         "kind": "youtube#searchResult",
+//         "etag": "FsAk7kcmk71XMQoALyhRovlu1Lc",
+//         "id": {
+//           "kind": "youtube#video",
+//           "videoId": "UmnCZ7-9yDY"
+//         },
+//         "snippet": {
+//           "publishedAt": "2021-07-03T16:37:28Z",
+//           "channelId": "UCBwmMxybNva6P_5VmxjzwqA",
+//           "title": "Java Tutorial for Beginners | Learn Java in 2 Hours",
+//           "description": "Are you worried about placements/internships? Want to prepare for companies like Microsoft, Amazon & Google? Join ALPHA.",
+//           "thumbnails": {
+//             "default": {
+//               "url": "https://i.ytimg.com/vi/UmnCZ7-9yDY/default.jpg",
+//               "width": 120,
+//               "height": 90
+//             },
+//             "medium": {
+//               "url": "https://i.ytimg.com/vi/UmnCZ7-9yDY/mqdefault.jpg",
+//               "width": 320,
+//               "height": 180
+//             },
+//             "high": {
+//               "url": "https://i.ytimg.com/vi/UmnCZ7-9yDY/hqdefault.jpg",
+//               "width": 480,
+//               "height": 360
+//             }
+//           },
+//           "channelTitle": "Apna College",
+//           "liveBroadcastContent": "none",
+//           "publishTime": "2021-07-03T16:37:28Z"
+//         }
+//       }
+//     ]
+//   }
+//  
+    
+    //video api
+    //data=  {
     //     "kind": "youtube#videoListResponse",
     //     "etag": "CCyctgrsO46tCI064TFD94IquEk",
     //     "items": [
