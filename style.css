@@ -35,9 +35,7 @@
 }
 /* -------------nav end-------------- */
 
-.main-container div{
-    /* border: 2px solid red; */
-}
+
 .main-container{
     display: grid;
     grid-template-columns: 19% 80%;
@@ -87,11 +85,17 @@
 }
 .video-details{
     display: flex;
+    row-gap: 5px;
 }
 .video-details .profile-logo{
     width: 50px;
-    margin: auto;
 }
+.video-details .profile-logo img{
+    width: 40px;
+    padding: 5px;
+    border-radius: 50px;
+}
+
 .video-details .details .video-name{
     margin-top: 5px;
     font-size: 10px;

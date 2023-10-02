@@ -1,4 +1,4 @@
-const apiKey = "AIzaSyBzClcGDgGHpIIcAGjrIETbHEunvJqHpOI";
+const apiKey = "AIzaSyD91cxlCz08UtjjOWl-fQQJPbwmj3n69x4";
 const baseUrl = "https://www.googleapis.com/youtube/v3";
 let inputbtn = document.querySelector(".nav-search-bar input");
 let videoContainer = document.getElementsByClassName("video-container")[0];
@@ -40,7 +40,12 @@ function viewCount(views){
     }
     return `${Math.floor(views/1000000)}M Views`
 }
-
+function navigateToVideo(videoId){
+    document.cookie=`id=${videoId}; path=/page-2/video.html`;
+    // document.cookie=`vedioData=${element}; path=/page-2/video.html`;
+    window.location.href="http://127.0.0.1:5502/page-2/video.html";
+   
+}
 async function getVideoStatistic(videoId){
     const url = `${baseUrl}/videos?key=${apiKey}&part=statistics&id=${videoId}`;
     try{
@@ -49,7 +54,7 @@ async function getVideoStatistic(videoId){
         return result.items[0].statistics;
     }
     catch(error){
-        alert(error);
+        console.log(error)
     }
 
 }
@@ -59,11 +64,10 @@ async function getChannelDetails(channelId){
     try{
         let responce = await fetch(url);
         let result = await responce.json();
-    
         return result.items[0].snippet.thumbnails.high.url;
     }
     catch(error){
-        alert(error);
+       console.log(error)
     }
    
 }
@@ -89,24 +93,31 @@ function renderVideo(arr){
             </div>`
             
           videoContainer.appendChild(videoCart)
+          videoCart.addEventListener("click",()=>{navigateToVideo(element.id.videoId)});
     });
 }
 
 async function getData(searchString){
-    const url= `${baseUrl}/search?key=${apiKey}&q=${searchString}&part=snippet&maxResults=20`;
+    const url= `${baseUrl}/search?key=${apiKey}&q=${searchString}&part=snippet&maxResults=20&type=video`;
     try{
         let responce = await fetch(url);
         let data = await responce.json();
         for(let i=0;i<data.items.length;++i){
-            let currentVideoId = data.items[i].id.videoId;
-            let channelId = data.items[i].snippet.channelId;
-        
-            let statistics = await getVideoStatistic(currentVideoId);
-            let channelLogoUrl = await getChannelDetails(channelId);    
-            data.items[i].statistics = statistics;
-            data.items[i].channelLogoUrl = channelLogoUrl;
+                let currentVideoId = data.items[i].id.videoId;
+                let channelId = data.items[i].snippet.channelId;
+                try{
+                    let statistics = await getVideoStatistic(currentVideoId);
+                    let channelLogoUrl = await getChannelDetails(channelId);
+                    data.items[i].statistics = statistics;
+                    data.items[i].channelLogoUrl = channelLogoUrl;
+                }
+                catch(error){
+                    console.log(error)
+                }
         }
         renderVideo(data.items);
+       
+        // console.log(data.items);
     }
     catch(error){
         alert(error);
@@ -169,25 +180,109 @@ inputbtn.addEventListener("keyup",(event)=>{
 //   }
 //  
     
-    //video api
-    //data=  {
-    //     "kind": "youtube#videoListResponse",
-    //     "etag": "CCyctgrsO46tCI064TFD94IquEk",
-    //     "items": [
-    //         {
-    //             "kind": "youtube#video",
-    //             "etag": "K4L6n5nVy_ub8A5ghATm-S2E7j8",
-    //             "id": "de7A-13MpEI",
-    //             "statistics": {
-    //                 "viewCount": "114",
-    //                 "likeCount": "14",
-    //                 "favoriteCount": "0",
-    //                 "commentCount": "2"
-    //             }
-    //         }
-    //     ],
-    //     "pageInfo": {
-    //         "totalResults": 1,
-    //         "resultsPerPage": 1
-    //     }
-    // }
+// Endpoint : video?
+// console.log(result)--------
+// {
+//     "kind": "youtube#videoListResponse",
+//     "etag": "k8JYOC5eq2a7bqFG3HLIct-Us9s",
+//     "items": [
+//         {
+//             "kind": "youtube#video",
+//             "etag": "FNWa_zJlTgV7v9Lj4YihMYSR_T4",
+//             "id": "_nqVLjtKkdE",
+//             "statistics": {
+//                 "viewCount": "810303",
+//                 "likeCount": "43167",
+//                 "favoriteCount": "0",
+//                 "commentCount": "504"
+//             }
+//         }
+//     ],
+//     "pageInfo": {
+//         "totalResults": 1,
+//         "resultsPerPage": 1
+//     }
+// }
+
+
+//     endPoint : /channels?
+// console.log(result)---
+// {
+//     "kind": "youtube#channelListResponse",
+//     "etag": "V7vS502ydlEQWVSxQl2amasWQns",
+//     "pageInfo": {
+//         "totalResults": 1,
+//         "resultsPerPage": 5
+//     },
+//     "items": [
+//         {
+//             "kind": "youtube#channel",
+//             "etag": "rjtTPQc8f_jQkehh-v_W77XLQts",
+//             "id": "UCsha2ITWrmaXHQfuNapG_TA",
+//             "snippet": {
+//                 "title": "AdiTea",
+//                 "description": "Muskurate Raho ❤️🤌🏼",
+//                 "customUrl": "@aditea31",
+//                 "publishedAt": "2020-07-04T15:20:06.906198Z",
+//                 "thumbnails": {
+//                     "default": {
+//                         "url": "https://yt3.ggpht.com/ytc/AOPolaRXfdrZecVhGn3s2mTl4Mn32EfPndIPTkKTncbmSw=s88-c-k-c0x00ffffff-no-rj",
+//                         "width": 88,
+//                         "height": 88
+//                     },
+//                     "medium": {
+//                         "url": "https://yt3.ggpht.com/ytc/AOPolaRXfdrZecVhGn3s2mTl4Mn32EfPndIPTkKTncbmSw=s240-c-k-c0x00ffffff-no-rj",
+//                         "width": 240,
+//                         "height": 240
+//                     },
+//                     "high": {
+//                         "url": "https://yt3.ggpht.com/ytc/AOPolaRXfdrZecVhGn3s2mTl4Mn32EfPndIPTkKTncbmSw=s800-c-k-c0x00ffffff-no-rj",
+//                         "width": 800,
+//                         "height": 800
+//                     }
+//                 },
+//                 "localized": {
+//                     "title": "AdiTea",
+//                     "description": "Muskurate Raho ❤️🤌🏼"
+//                 }
+//             }
+//         }
+//     ]
+// }
+
+
+// 0: 
+// channelLogoUrl: "https://yt3.ggpht.com/ytc/APkrFKb--NH6RwAGHYsD3KfxX-SAgWgIHrjR5E4Jb5SDSQ=s800-c-k-c0x00ffffff-no-rj"
+// etag: "6xKwmejEePIyw05TWYAJkjZpe7M"
+// id: 
+// kind : "youtube#video"
+// videoId: "l9AzO1FMgM8"
+// [[Prototype]]
+// : 
+// Object
+// kind
+// : 
+// "youtube#searchResult"
+// snippet
+// : 
+// {publishedAt: '2021-11-03T16:23:58Z', channelId: 'UCsBjURrPoezykLs9EqgamOA', title: 'Java in 100 Seconds', description: 'Java is a programming language famous for its abil…ndent bytecode. It powers enterprise web apps ...', thumbnails: {…}, …}
+// statistics
+// : 
+// commentCount
+// : 
+// "1607"
+// favoriteCount
+// : 
+// "0"
+// likeCount
+// : 
+// "63161"
+// viewCount
+// : 
+// "1031684"
+// [[Prototype]]
+// : 
+// Object
+// [[Prototype]]
+// : 
+// Object
